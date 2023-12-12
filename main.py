@@ -17,7 +17,7 @@ header_mappings = [
     Mapping(None, "Component"),
     Mapping(None, "Affects Version"),
     Mapping("Azure DevOps", "Fix Version"),
-    Mapping("Maybe can be done by a python script", "Comment Body"),
+    Mapping(None, "Comment Body"), # maybe can scrape comments and add them here 
     Mapping("Created Date", "Date Created"),
     Mapping("Changed Date", "Date Modified"),
     Mapping("Due Date", "Due Date"),
@@ -75,14 +75,17 @@ def map_to_jira_user(user: str) -> str:
 
 
 def main():
-    with open(source_file, "r") as file:
+    data: list(str) = []
+
+    with open(source_file, "r", encoding="utf-8-sig") as file:
         reader = csv.reader(file)
-        data = list(reader)
+        for row in reader:
+            data.append(row)
 
     header_row = data[0]
     mapped_header = [map_to_jira(header) for header in header_row]
 
-    with open(f"{source_file}-output.csv", "w") as file:
+    with open(f"{source_file}-output.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
         writer.writerow(mapped_header)
         writer.writerows(data[1:])
