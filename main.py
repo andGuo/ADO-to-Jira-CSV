@@ -12,7 +12,8 @@ source_file = "data.csv"
 
 header_mappings = [
     Mapping("Area Level 2", "Project"),
-    Mapping("Description", "Summary"),
+    Mapping("Title", "Summary"),
+    Mapping("Description", "Description"),
     Mapping("ID", "Issue Key"),
     Mapping(None, "Component"),
     Mapping(None, "Affects Version"),
@@ -40,10 +41,12 @@ header_mappings = [
         None, "Remaining Estimate"
     ),  # probably can calculate from Original Estimate and Finish Date
     Mapping("Effort", "Time Spent"),
-    Mapping("Assigned To", "Users"),
+    Mapping("Assigned To", "Assignee"),
     Mapping(
-        "Created By", "Watchers"
-    ),  # maybe can add all commenters here if we end up scraping comments
+        "Created By", "Reporter"
+    ), 
+    Mapping(None, "Users"), # maybe can add all commenters here if we end up scraping comments
+    Mapping(None, "Watchers"), 
     Mapping(None, "Other fields"),  # Insert custom fields here
 ]
 
