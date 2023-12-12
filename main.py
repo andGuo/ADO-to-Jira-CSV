@@ -52,6 +52,10 @@ def map_to_jira(header: str) -> str:
     for mapping in header_mappings:
         if mapping.azure_str == header:
             return mapping.jira_str
+    
+    print(f"WARNING: No mapping found for {header}")
+
+    return header
 
 
 def convert_to_jira_date_format(date: str) -> str:
